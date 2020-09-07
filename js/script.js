@@ -17,9 +17,10 @@ For assistance:
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
+const STUDENTS_NUM=9;
 function showPage(list,page){
-   const startIndex=(page * 9)-9;
-   const endIndex = (page*9);
+   const startIndex=(page * STUDENTS_NUM)-STUDENTS_NUM;
+   const endIndex = (page*STUDENTS_NUM);
    
    const ul =document.querySelector('.student-list');
    ul.innerHTML="";
@@ -29,7 +30,7 @@ let text=``;
       text +=`<li class="student-item cf">
       <div class="student-details"><img class="avatar" src="${list[i].picture.medium}" alt="Profile Picture"><h3>${list[i].name.first} ${list[i].name.last}</h3><span class="email">${list[i].email}</span></div><div class="joined-details"><span class="date">${list[i].registered.date}</span><div></li>`;
    }
-   console.log(text);
+  // console.log(text);
    ul.innerHTML=text;
 
 
@@ -42,9 +43,43 @@ Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
 function addPagination(list){
+   const numPages=list.length/STUDENTS_NUM;
+   const ul=document.querySelector(".link-list");
+   ul.innerHTML="";
+   let text='';
+   for(let i=1; i<=numPages; i++)
+   {
+      if(i==1)
+      {
+
+         text += `<li><button type ="button"   class="active">${i}</button></li>`
+      }
+      else{
+      text += `<li><button type ="button"   >${i}</button></li>`
+      }
+   }
+   ul.innerHTML=text;
+
+   ul.addEventListener('click',(e)=>{
+
+      if(e.target.tagName=='BUTTON')
+      {
+         //alert(e.target.tagName);
+         const button=ul.querySelector(".active");
+        // alert(button);
+         button.className="";
+         const newbutton=e.target;
+         newbutton.className="active";
+         
+         let num=parseInt(newbutton.textContent);
+         showPage(data,num)
+      }
+   })
+
 
 }
 
 
 // Call functions
-showPage(data,1)
+showPage(data,1);
+addPagination(data);
