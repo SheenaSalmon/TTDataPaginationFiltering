@@ -20,8 +20,11 @@ This function will create and insert/append the elements needed to display a "pa
 const STUDENTS_NUM=9;
 function showPage(list,page){
    const startIndex=(page * STUDENTS_NUM)-STUDENTS_NUM;
-   const endIndex = (page*STUDENTS_NUM);
-   
+   let endIndex = (page*STUDENTS_NUM);
+   if(endIndex > list.length)
+   {
+      endIndex=list.length;
+   }
    const ul =document.querySelector('.student-list');
    ul.innerHTML="";
 let text=``;
@@ -78,8 +81,67 @@ function addPagination(list){
 
 
 }
+function searchStudents()
+{
+   
+}
+
+//Create Search Component
+function showSearchBar()
+{
+   const header=document.querySelector('header');
+   const form=document.createElement("FORM");
+   const labelSearch=document.createElement("LABEL");
+   const searchBar=document.createElement("INPUT");
+
+
+//for="search" class="student-search
+labelSearch.setAttribute("id","search");
+labelSearch.className="student-search";
+
+   searchBar.setAttribute("type","search");
+   searchBar.setAttribute("placeholder","Search by name...");
+   header.appendChild(form);
+
+   form.appendChild(labelSearch);
+   labelSearch.appendChild(searchBar);
+   
+
+   const button=`<button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>`;
+   searchBar.insertAdjacentHTML("afterend",button);
+   labelSearch.addEventListener('click', (e)=>
+   {
+      //alert(e.target.tagName);
+      if(e.target.tagName=='BUTTON' || e.target.tagName=='IMG')
+      {
+         //alert("hello");
+      let nameFilter=searchBar.value;
+      //alert(nameFilter);
+      let newData=[];
+
+      for(let i=0; i<data.length ; i++)
+      {
+        let fullName= `${data[i].name.title} ${data[i].name.first} ${data[i].name.last}`;
+        if (fullName.toUpperCase().includes(nameFilter.toUpperCase()))
+        {
+           console.log(i);
+           newData.push(data[i]);
+          // console.log(newData);
+        }
+
+      }
+      console.log(newData);
+      showPage(newData,1);
+      addPagination(newData);
+      }
+   }
+
+   )
+
+}
 
 
 // Call functions
 showPage(data,1);
 addPagination(data);
+showSearchBar();
