@@ -125,7 +125,7 @@ function showSearchBar() {
       if (e.target.tagName == 'BUTTON' || e.target.tagName == 'IMG')//Check if the button or image in the button is clicked
       {
          let nameFilter = searchBar.value;
-         let nF = searchStudents(nameFilter);//Send to searchStudent function to see if the entered name is in the student data array.  Receive the resul in nF
+         let nF = searchStudents(nameFilter);//Send to searchStudent function to see if the entered name is in the student data array.  Receive the result in nF
          showPage(nF, 1);
          addPagination(nF); 
       
@@ -135,11 +135,12 @@ function showSearchBar() {
 
    )
 
+   //event handler added for key up, results are shown as the user types
    searchBar.addEventListener('keyup', (e) => {
 
       
          let nameFilter = searchBar.value;
-         let nF = searchStudents(nameFilter);//Send to searchStudent function to see if the entered name is in the student data array.  Receive the resul in nF
+         let nF = searchStudents(nameFilter);//Send to searchStudent function to see if the entered name is in the student data array.  Receive the result in nF
          showPage(nF, 1);
          addPagination(nF); 
       
