@@ -39,7 +39,7 @@ function showPage(list, page) {
    }
    }
    else{
-      text +='No Students';
+      text +='No results found';
    }
    ul.innerHTML = text;
 }
